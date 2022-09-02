@@ -5,6 +5,8 @@
 - [ ] scaling alerts
 - [ ] GitOps?
 - [x] CI/CD: use waypoint instead
+  - Check branch name, so it's possible to target different app deployment with different config for dev/prod
+  - also target different waypoint server (per each k8s cluster)
 - [ ] secrets
 - [x] logging: https://cloud.google.com/stackdriver/docs/solutions/gke/installing
 - [ ] cost breakdown

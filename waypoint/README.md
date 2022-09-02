@@ -31,5 +31,8 @@ Access via <https://localhost:9702>
 
 ```bash
 waypoint init
-waypoint up
+waypoint up -prune-retain=0 # -a kubernetes-nodejs-web
+
+# cleanup
+waypoint destroy
 ```
