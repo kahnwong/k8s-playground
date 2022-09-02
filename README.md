@@ -3,9 +3,11 @@
 ## TODO
 
 - [ ] scaling alerts
-- [ ] GitOps
-- [ ] CI/CD
+- [ ] GitOps?
+- [x] CI/CD: use waypoint instead
 - [ ] secrets
+- [x] logging: https://cloud.google.com/stackdriver/docs/solutions/gke/installing
+- [ ] cost breakdown
 
 ## Pre-requisites
 
@@ -15,12 +17,24 @@ brew install --cask lens # for GUI dashboard
 
 ## Setup
 
+### k3s
+
 ```bash
-# install
 curl -sfL https://get.k3s.io | sh -
 
 # export kubeconfig
 kubectl config view --raw # copy this to ~/.kube/config on your local machine
+```
+
+### kind
+
+```bash
+brew install kind
+kind create cluster
+# kind delete cluster
+
+# export kubeconfig
+kind get kubeconfig # copy this to ~/.kube/config on your local machine
 ```
 
 ## Deployment
@@ -45,21 +59,6 @@ helm repo add hashicorp https://helm.releases.hashicorp.com
 helm install vault hashicorp/vault
 ```
 
-### Waypoint
-
-```bash
-helm repo add hashicorp https://helm.releases.hashicorp.com
-helm upgrade --install waypoint hashicorp/waypoint
-waypoint login -from-kubernetes
-```
-
-### Terraform
-
-```bash
-terraform init
-terraform apply
-```
-
 ## Useful commands
 
 ```bash
@@ -68,6 +67,9 @@ kubectl get services
 kubectl describe services
 kubectl get pods
 kubectl get all --all-namespaces
+
+kubectl config --kubeconfig ~/.kube/mac.config get-contexts
+kubectl config --kubeconfig ~/.kube/mac.config use-context kind-kind
 ```
 
 ## Resources
@@ -79,3 +81,8 @@ kubectl get all --all-namespaces
 
 - <https://learn.hashicorp.com/tutorials/terraform/kubernetes-provider?in=terraform/kubernetes>
 - <https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/guides/getting-started>
+
+### Deployment
+
+- <https://codefresh.io/blog/kubernetes-antipatterns-1/>
+- <https://github.com/hashicorp/terraform-guides/tree/master/operations/automation-script>
