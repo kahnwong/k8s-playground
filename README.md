@@ -1,5 +1,12 @@
 # k8s-playground
 
+## TODO
+
+- [ ] scaling alerts
+- [ ] GitOps
+- [ ] CI/CD
+- [ ] secrets
+
 ## Pre-requisites
 
 ```bash
