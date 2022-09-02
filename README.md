@@ -1,32 +1,24 @@
 # k8s-playground
 
-## Install
-
-### [k3s](https://k3s.io/)
+## Pre-requisites
 
 ```bash
-# https://rancher.com/docs/k3s/latest/en/installation/install-options/
+brew install --cask lens # for GUI dashboard
+```
+
+## Setup
+
+```bash
+# install
 curl -sfL https://get.k3s.io | sh -
-# mkdir ~/.kube
-# cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+
+# export kubeconfig
+kubectl config view --raw # copy this to ~/.kube/config on your local machine
 ```
 
-### [microk8s](https://microk8s.io/)
+## Deployment
 
-```bash
-sudo snap install microk8s --classic
-# microk8s enable dashboard dns registry istio
-```
-
-## Access cluster
-
-```bash
-brew install --cask lens
-
-kubectl config view --raw > ~/.kube/config # or microk8s config > ~/.kube/config
-```
-
-## Deploy
+### Helm
 
 ```bash
 brew install helm kubectl
@@ -35,15 +27,7 @@ helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 helm upgrade --install metrics-server metrics-server/metrics-server
 ```
 
-### Setup Waypoint
-
-```bash
-helm repo add hashicorp https://helm.releases.hashicorp.com
-helm upgrade --install waypoint hashicorp/waypoint
-waypoint login -from-kubernetes
-```
-
-### Interesting charts
+#### Interesting charts
 
 ```bash
 # admin:prom-operator
@@ -54,16 +38,37 @@ helm repo add hashicorp https://helm.releases.hashicorp.com
 helm install vault hashicorp/vault
 ```
 
-## Resources
-
-- <https://artifacthub.io>
-
-## Access services
+### Waypoint
 
 ```bash
-# kubectl expose deployment vault-agent-injector --type=NodePort --port=8080
+helm repo add hashicorp https://helm.releases.hashicorp.com
+helm upgrade --install waypoint hashicorp/waypoint
+waypoint login -from-kubernetes
+```
+
+### Terraform
+
+```bash
+terraform init
+terraform apply
+```
+
+## Useful commands
+
+```bash
+kubectl expose deployment vault-agent-injector --type=NodePort --port=8080
 kubectl get services
 kubectl describe services
 kubectl get pods
 kubectl get all --all-namespaces
 ```
+
+## Resources
+
+- <https://artifacthub.io>
+- <https://rancher.com/docs/k3s/latest/en/installation/install-options/>
+
+### Terraform
+
+- <https://learn.hashicorp.com/tutorials/terraform/kubernetes-provider?in=terraform/kubernetes>
+- <https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/guides/getting-started>
