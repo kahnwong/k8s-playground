@@ -15,6 +15,7 @@
 ## Pre-requisites
 
 ```bash
+brew install helm kubectl
 brew install --cask lens # for GUI dashboard
 ```
 
@@ -40,24 +41,41 @@ kind create cluster
 kind get kubeconfig # copy this to ~/.kube/config on your local machine
 ```
 
-## Deployment
+### Docker desktop
 
-### Helm
+Enable kubernetes via the UI
+
+## Setup monitoring
+
+<!-- Need to add `--kubelet-insecure-tls` args on local k8s
+
+### metrics-server
 
 ```bash
-brew install helm kubectl
+# or install via helm chart in Lens
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
-helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
-helm upgrade --install metrics-server metrics-server/metrics-server
+# add / update following parameters: https://github.com/kubernetes-sigs/metrics-server/issues/812
+args: --kubelet-insecure-tls
+initialDelaySeconds: 300
+periodSeconds: 30
+
+kubectl get deployment metrics-server -n kube-system
+# kubectl delete -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+``` -->
+
+```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install kube-prometheus bitnami/kube-prometheus
+
+# or with grafana: -> admin:prom-operator !!!!! Crash loop-back on darwin !!!!!
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack
 ```
 
-#### Interesting charts
+## Interesting charts
 
 ```bash
-# admin:prom-operator
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install grafana prometheus-community/kube-prometheus-stack
-
 helm repo add hashicorp https://helm.releases.hashicorp.com
 helm install vault hashicorp/vault
 ```
