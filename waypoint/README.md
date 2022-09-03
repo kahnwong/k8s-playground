@@ -2,7 +2,7 @@
 
 ## Setup
 
-Doesn't work with k3s because port 80 and 443 are in use by default
+Doesn't work with k3s because port 80 and 443 are in use by default via traefik, need to disable it during k3s install
 
 Also wonky with kind
 

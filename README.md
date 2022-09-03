@@ -3,7 +3,7 @@
 ## TODO
 
 - [ ] scaling alerts
-- [ ] GitOps?
+- [x] GitOps? -> Argo CD UI is pretty horrid...
 - [x] CI/CD: <https://developer.hashicorp.com/waypoint/docs/automating-execution/github-actions>
   - Check branch name, so it's possible to target different app deployment with different config for dev/prod
   - also target different waypoint server (per each k8s cluster)
@@ -26,10 +26,14 @@ brew install --cask lens # for GUI dashboard
 #### k3s
 
 ```bash
-curl -sfL https://get.k3s.io | sh -
+# curl -sfL https://get.k3s.io | sh -
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --no-deploy traefik" sh # so it frees up port 80 and 443
 
 # export kubeconfig
 kubectl config view --raw # copy this to ~/.kube/config on your local machine
+
+# uninstall
+/usr/local/bin/k3s-uninstall.sh
 ```
 
 #### kind
