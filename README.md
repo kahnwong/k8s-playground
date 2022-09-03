@@ -21,7 +21,9 @@ brew install --cask lens # for GUI dashboard
 
 ## Setup
 
-### k3s
+### kubernetes
+
+#### k3s
 
 ```bash
 curl -sfL https://get.k3s.io | sh -
@@ -30,7 +32,7 @@ curl -sfL https://get.k3s.io | sh -
 kubectl config view --raw # copy this to ~/.kube/config on your local machine
 ```
 
-### kind
+#### kind
 
 ```bash
 brew install kind
@@ -41,11 +43,11 @@ kind create cluster
 kind get kubeconfig # copy this to ~/.kube/config on your local machine
 ```
 
-### Docker desktop
+#### Docker desktop
 
 Enable kubernetes via the UI
 
-## Setup monitoring
+### Monitoring
 
 <!-- Need to add `--kubelet-insecure-tls` args on local k8s
 
@@ -91,6 +93,9 @@ kubectl get all --all-namespaces
 
 kubectl config --kubeconfig ~/.kube/mac.config get-contexts
 kubectl config --kubeconfig ~/.kube/mac.config use-context kind-kind
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl delete -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 
 ## Resources
