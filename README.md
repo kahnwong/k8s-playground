@@ -53,23 +53,6 @@ Enable kubernetes via the UI
 
 ### Monitoring
 
-<!-- Need to add `--kubelet-insecure-tls` args on local k8s
-
-### metrics-server
-
-```bash
-# or install via helm chart in Lens
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-
-# add / update following parameters: https://github.com/kubernetes-sigs/metrics-server/issues/812
-args: --kubelet-insecure-tls
-initialDelaySeconds: 300
-periodSeconds: 30
-
-kubectl get deployment metrics-server -n kube-system
-# kubectl delete -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-``` -->
-
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install kube-prometheus bitnami/kube-prometheus

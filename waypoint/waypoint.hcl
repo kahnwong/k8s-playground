@@ -26,6 +26,15 @@ app "web" {
         max_replicas = 8
         cpu_percent  = 60
       }
+
+      pod {
+        container {
+          cpu {
+            limit   = "512m"
+            request = "100m"
+          }
+        }
+      }
     }
   }
 
