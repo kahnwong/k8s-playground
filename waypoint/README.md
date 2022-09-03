@@ -36,3 +36,7 @@ waypoint up -prune-retain=0 # -a kubernetes-nodejs-web
 # cleanup
 waypoint destroy
 ```
+
+## References
+
+- <https://sourcegraph.com/github.com/cardstack/cardstack/-/blob/waypoint.hcl>

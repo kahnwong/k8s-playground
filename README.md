@@ -4,11 +4,12 @@
 
 - [ ] scaling alerts
 - [ ] GitOps?
-- [x] CI/CD: use waypoint instead
+- [x] CI/CD: <https://developer.hashicorp.com/waypoint/docs/automating-execution/github-actions>
   - Check branch name, so it's possible to target different app deployment with different config for dev/prod
   - also target different waypoint server (per each k8s cluster)
-- [ ] secrets
-- [x] logging: https://cloud.google.com/stackdriver/docs/solutions/gke/installing
+  - and set up variables per each env to fetch the right config
+- [x] secrets: <https://developer.hashicorp.com/waypoint/docs/kubernetes/config>
+- [x] logging: <https://cloud.google.com/stackdriver/docs/solutions/gke/installing>
 - [ ] cost breakdown
 
 ## Pre-requisites
