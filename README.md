@@ -4,11 +4,8 @@
 
 - [ ] scaling alerts
 - [x] GitOps? -> Argo CD UI is pretty horrid...
-- [x] CI/CD: <https://developer.hashicorp.com/waypoint/docs/automating-execution/github-actions>
-  - Check branch name, so it's possible to target different app deployment with different config for dev/prod
-  - also target different waypoint server (per each k8s cluster)
-  - and set up variables per each env to fetch the right config
-- [x] secrets: <https://developer.hashicorp.com/waypoint/docs/kubernetes/config>
+- [x] CI/CD: <https://github.com/GoogleCloudPlatform/microservices-demo/actions/runs/1114294209/workflow>
+- [x] secrets: <https://cloud.google.com/secret-manager/docs/using-other-products#google-kubernetes-engine>
 - [x] logging: <https://cloud.google.com/stackdriver/docs/solutions/gke/installing>
 - [ ] cost breakdown
 
@@ -54,12 +51,14 @@ Enable kubernetes via the UI
 ### Monitoring
 
 ```bash
+kubectl create namespace kube-prometheus-stack
+
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install kube-prometheus bitnami/kube-prometheus
+helm install kube-prometheus bitnami/kube-prometheus --namespace kube-prometheus-stack
 
 # or with grafana: -> admin:prom-operator !!!!! Crash loop-back on darwin !!!!!
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace kube-prometheus-stack
 ```
 
 ## Interesting charts
