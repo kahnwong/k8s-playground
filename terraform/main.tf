@@ -2,21 +2,21 @@ resource "kubernetes_deployment" "nginx" {
   metadata {
     name = "scalable-nginx-example"
     labels = {
-      App = "ScalableNginxExample"
+      app = "ScalableNginxExample"
     }
   }
 
   spec {
-    replicas = 2
+    replicas = 1
     selector {
       match_labels = {
-        App = "ScalableNginxExample"
+        app = "ScalableNginxExample"
       }
     }
     template {
       metadata {
         labels = {
-          App = "ScalableNginxExample"
+          app = "ScalableNginxExample"
         }
       }
       spec {
@@ -50,7 +50,7 @@ resource "kubernetes_service" "nginx" {
   }
   spec {
     selector = {
-      App = kubernetes_deployment.nginx.spec.0.template.0.metadata[0].labels.App
+      app = kubernetes_deployment.nginx.spec[0].template[0].metadata[0].labels.app
     }
     port {
       node_port   = 30201
