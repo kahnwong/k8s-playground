@@ -18,47 +18,17 @@ brew install --cask lens # for GUI dashboard
 
 ## Setup
 
-### kubernetes
-
-#### k3s
+### k3s
 
 ```bash
 # curl -sfL https://get.k3s.io | sh -
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --no-deploy traefik" sh # so it frees up port 80 and 443
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik" sh # so it frees up port 80 and 443
 
 # export kubeconfig
-kubectl config view --raw # copy this to ~/.kube/config on your local machine
+k3s kubectl config view --raw # copy this to ~/.kube/config on your local machine
 
 # uninstall
 /usr/local/bin/k3s-uninstall.sh
-```
-
-#### kind
-
-```bash
-brew install kind
-kind create cluster
-# kind delete cluster
-
-# export kubeconfig
-kind get kubeconfig # copy this to ~/.kube/config on your local machine
-```
-
-#### Docker desktop
-
-Enable kubernetes via the UI
-
-### Monitoring
-
-```bash
-kubectl create namespace kube-prometheus-stack
-
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install kube-prometheus bitnami/kube-prometheus --namespace kube-prometheus-stack
-
-# or with grafana: -> admin:prom-operator !!!!! Crash loop-back on darwin !!!!!
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace kube-prometheus-stack
 ```
 
 ## Interesting charts
