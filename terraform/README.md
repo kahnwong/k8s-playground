@@ -1,25 +1,33 @@
 # terraform
 
+## kubernetes-dashboard
+
+```bash
+kubectl -n kubernetes-dashboard create token admin-user
+```
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | terraform | >= 1.3.6 |
+| helm | 2.8.0 |
 | kubernetes | 2.16.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
+| helm | 2.8.0 |
 | kubernetes | 2.16.1 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [kubernetes_deployment.nginx](https://registry.terraform.io/providers/hashicorp/kubernetes/2.16.1/docs/resources/deployment) | resource |
-| [kubernetes_service.nginx](https://registry.terraform.io/providers/hashicorp/kubernetes/2.16.1/docs/resources/service) | resource |
+| [helm_release.kubernetes_dashboard](https://registry.terraform.io/providers/hashicorp/helm/2.8.0/docs/resources/release) | resource |
+| [kubernetes_namespace.kubernetes_dashboard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.16.1/docs/resources/namespace) | resource |
 
 ## Inputs
 
