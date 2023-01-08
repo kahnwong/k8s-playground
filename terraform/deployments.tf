@@ -1,3 +1,6 @@
+###############################
+# kube-dashboard
+###############################
 # https://docs.k3s.io/installation/kube-dashboard
 
 resource "kubernetes_namespace" "kubernetes_dashboard" {
@@ -36,4 +39,23 @@ resource "helm_release" "kubernetes_dashboard" {
     name  = "rbac.clusterReadOnlyRole"
     value = "true"
   }
+}
+
+
+###############################
+# kube-prometheus-stack
+###############################
+# !!!!! cash loop-back on darwin
+
+resource "kubernetes_namespace" "kube_prometheus_stack" {
+  metadata {
+    name = "kube-prometheus-stack"
+  }
+}
+resource "helm_release" "kube_prometheus_stack" {
+  name = "kube-prometheus-stack"
+
+  repository = "https://prometheus-community.github.io/helm-charts/"
+  chart      = "kube-prometheus-stack"
+  namespace  = kubernetes_namespace.kube_prometheus_stack.id
 }

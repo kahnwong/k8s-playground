@@ -6,6 +6,12 @@
 kubectl -n kubernetes-dashboard create token admin-user
 ```
 
+## kube-prometheus-stack
+
+```bash
+# default login: admin:prom-operator
+```
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -26,7 +32,9 @@ kubectl -n kubernetes-dashboard create token admin-user
 
 | Name | Type |
 |------|------|
+| [helm_release.kube_prometheus_stack](https://registry.terraform.io/providers/hashicorp/helm/2.8.0/docs/resources/release) | resource |
 | [helm_release.kubernetes_dashboard](https://registry.terraform.io/providers/hashicorp/helm/2.8.0/docs/resources/release) | resource |
+| [kubernetes_namespace.kube_prometheus_stack](https://registry.terraform.io/providers/hashicorp/kubernetes/2.16.1/docs/resources/namespace) | resource |
 | [kubernetes_namespace.kubernetes_dashboard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.16.1/docs/resources/namespace) | resource |
 
 ## Inputs
