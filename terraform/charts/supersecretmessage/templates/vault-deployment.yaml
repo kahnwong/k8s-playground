@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -c -f docker-compose-supersecretmessage.yml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp:
+  labels:
+    io.kompose.service: vault
+  name: vault
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: vault
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -c -f docker-compose-supersecretmessage.yml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp:
+      labels:
+        io.kompose.network/supersecret: "true"
+        io.kompose.service: vault
+    spec:
+      containers:
+        - env:
+            - name: VAULT_DEV_ROOT_TOKEN_ID
+              value: supersecret
+          image: vault:latest
+          name: vault
+          ports:
+            - containerPort: 8200
+          resources: {}
+          securityContext:
+            capabilities:
+              add:
+                - IPC_LOCK
+      restartPolicy: Always
+status: {}

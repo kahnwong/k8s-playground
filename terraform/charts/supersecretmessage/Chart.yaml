@@ -1,0 +1,9 @@
+---
+name: docker-compose-supersecretmessage
+description: A generated Helm Chart for docker-compose-supersecretmessage from Skippbox Kompose
+version: 0.0.1
+apiVersion: v1
+keywords:
+  - docker-compose-supersecretmessage
+sources:
+home:

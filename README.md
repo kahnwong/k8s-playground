@@ -13,7 +13,7 @@
 
 ```bash
 brew install helm kubectl
-brew install --cask lens # for GUI dashboard
+brew install --cask openlens # for GUI dashboard
 ```
 
 ## Setup
