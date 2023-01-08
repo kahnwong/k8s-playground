@@ -3,9 +3,4 @@ resource "helm_release" "supersecretmessage" {
 
   chart     = "./charts/supersecretmessage"
   namespace = "default"
-
-  #   set {
-  #     name  = "rbac.clusterReadOnlyRole"
-  #     value = "true"
-  #   }
 }
