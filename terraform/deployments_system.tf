@@ -58,4 +58,9 @@ resource "helm_release" "kube_prometheus_stack" {
   repository = "https://prometheus-community.github.io/helm-charts/"
   chart      = "kube-prometheus-stack"
   namespace  = kubernetes_namespace.kube_prometheus_stack.id
+
+  set {
+    name  = "grafana.defaultDashboardsTimezone"
+    value = "Asia/Bangkok"
+  }
 }
