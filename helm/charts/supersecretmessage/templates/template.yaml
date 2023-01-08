@@ -19,8 +19,7 @@ spec:
     spec:
       containers:
         - name: supersecret
-          image: ghcr.io/kahnwong/sup3rs3cretmes5age
-          tag: latest
+          image: ghcr.io/kahnwong/sup3rs3cretmes5age:latest
           ports:
             - name: http
               containerPort: 8082
@@ -39,8 +38,7 @@ spec:
             - name: VAULT_TOKEN
               value: supersecret
         - name: vault
-          image: vault
-          tag: latest
+          image: vault:latest
           ports:
             - containerPort: 8200
               protocol: TCP
