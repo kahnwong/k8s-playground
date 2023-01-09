@@ -66,47 +66,42 @@ resource "helm_release" "kube_prometheus_stack" {
 }
 
 
-###############################
-# csi secret store
-###############################
-resource "helm_release" "csi_secrets_store" {
-  name = "csi-secrets-store"
+# ###############################
+# # csi secret store
+# ###############################
+# resource "helm_release" "csi_secrets_store" {
+#   name = "csi-secrets-store"
 
-  repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts/"
-  chart      = "secrets-store-csi-driver"
-  namespace  = "kube-system"
-}
+#   repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts/"
+#   chart      = "secrets-store-csi-driver"
+#   namespace  = "kube-system"
+# }
 
 
-###############################
-# csi driver: vault
-###############################
-# https://github.com/hashicorp/vault-csi-provider
+# ###############################
+# # csi driver: vault
+# ###############################
+# # https://github.com/hashicorp/vault-csi-provider
 
-resource "kubernetes_namespace" "vault" {
-  metadata {
-    name = "vault"
-  }
-}
-resource "helm_release" "vault" {
-  name = "vault"
+# resource "helm_release" "vault" { # has to be in the same namespace as your other app resources
+#   name = "vault"
 
-  repository = "https://helm.releases.hashicorp.com/"
-  chart      = "vault"
-  namespace  = kubernetes_namespace.vault.id
+#   repository = "https://helm.releases.hashicorp.com/"
+#   chart      = "vault"
+#   namespace  = "default"
 
-  set {
-    name  = "server.dev.enabled"
-    value = "true"
-  }
+#   set {
+#     name  = "server.dev.enabled"
+#     value = "true"
+#   }
 
-  set {
-    name  = "injector.enabled"
-    value = "false"
-  }
+#   set {
+#     name  = "injector.enabled"
+#     value = "false"
+#   }
 
-  set {
-    name  = "csi.enabled"
-    value = "true"
-  }
-}
+#   set {
+#     name  = "csi.enabled"
+#     value = "true"
+#   }
+# }
